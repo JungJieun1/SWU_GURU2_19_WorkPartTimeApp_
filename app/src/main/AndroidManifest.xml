@@ -12,6 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SWU_GURU_19_WorkPartTimeApp_">
         <activity
+            android:name=".activity_task_management"
+            android:exported="false" />
+        <activity
+            android:name=".activity_attendance_status"
+            android:exported="false" />
+        <activity
+            android:name=".activity_employee_add"
+            android:exported="false" />
+        <activity
+            android:name=".activity_employee_list"
+            android:exported="false" />
+        <activity
+            android:name=".activity_workplace_add"
+            android:exported="false" />
+        <activity
+            android:name=".activity_workplace_list"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

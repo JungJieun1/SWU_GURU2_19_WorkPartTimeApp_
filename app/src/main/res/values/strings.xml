@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">SWU_GURU_19_WorkPartTimeApp_</string>
+
+    <string-array name="category_array">
+        <item>업종을 선택하세요</item>
+        <item>카페</item>
+        <item>편의점</item>
+        <item>식당 / 음식점</item>
+        <item>패스트푸드</item>
+        <item>베이커리</item>
+        <item>학원 / 교육</item>
+        <item>기타 서비스업</item>
+    </string-array>
+
+    <string-array name="work_type_array">
+        <item>근무 유형을 선택하세요</item>
+        <item>오픈</item>
+        <item>미들</item>
+        <item>마감</item>
+        <item>주말</item>
+        <item>기타</item>
+    </string-array>
 </resources>
