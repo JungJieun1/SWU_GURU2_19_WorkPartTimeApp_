@@ -11,15 +11,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SWU_GURU_19_WorkPartTimeApp_">
+
+        <!-- 메인 화면은 첫 화면 표시를 뺍니다 -->
         <activity
             android:name=".MainActivity"
+            android:exported="true" />
+
+        <!-- 회원가입 1단계 화면 (처음 켜지는 앱의 첫 화면으로 지정!) -->
+        <activity
+            android:name=".SignUpActivity_1"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 회원가입 2단계 화면 (1단계에서 넘어오는 도착지 화면) -->
+        <activity
+            android:name=".SignUpActivity_2"
+            android:exported="true" />
+
+        <!-- ⭐ 이 부분을 추가해 주세요! (회원가입 3단계 화면) -->
+        <activity
+            android:name=".SignUpActivity_3"
+            android:exported="false" />
+
     </application>
 
 </manifest>

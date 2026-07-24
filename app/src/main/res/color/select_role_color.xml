@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 1. 버튼이 '선택(selected)' 되었을 때: 주황색 -->
+    <item android:state_selected="true" android:color="#F7931E" />
+
+    <!-- 2. 아무 상태도 아닐 때 (기본값): 옅은 회색 -->
+    <item android:color="#E0E0E0" />
+</selector>
