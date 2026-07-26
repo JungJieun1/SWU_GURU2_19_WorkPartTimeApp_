@@ -9,9 +9,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class activity_workplace_list : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: WorkplaceAdapter
+    private var workplaceList = mutableListOf<Workplace>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,16 +30,27 @@ class activity_workplace_list : AppCompatActivity() {
 
         val workplaceHeader = findViewById<LinearLayout>(R.id.workplaceHeader)
         val btnBack = workplaceHeader.getChildAt(0) as? ImageView
-        val recyclerView = findViewById<RecyclerView>(R.id.WorkplaceList)
-        val btnWorkpalceAdd = findViewById<Button>(R.id.btnWorkpalceAdd)
+        recyclerView = findViewById(R.id.WorkplaceList)
+        val btnWorkplaceAdd = findViewById<Button>(R.id.btnWorkplaceAdd)
+
+        // RecyclerView 세팅 (처음에는 빈 리스트 상태)
+        adapter = WorkplaceAdapter(workplaceList)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
 
         btnBack?.setOnClickListener {
             finish()
         }
 
-        btnWorkpalceAdd.setOnClickListener {
+        btnWorkplaceAdd?.setOnClickListener {
             val intent = Intent(this, activity_workplace_add::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // 9번(추가/삭제) 화면에서 저장하고 돌아왔을 때
+        // DB 목록을 읽어와서 workplaceList를 갱신, adapter.notifyDataSetChanged()를 호출
     }
 }

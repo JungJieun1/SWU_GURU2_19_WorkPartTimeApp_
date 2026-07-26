@@ -29,6 +29,15 @@
             android:text="서울시 강남구 테헤란로 123"
             android:textColor="#888888"
             android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvWorkplacePhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="02-123-4567"
+            android:textColor="#888888"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <ImageView

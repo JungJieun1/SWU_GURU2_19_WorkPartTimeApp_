@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 
@@ -14,6 +15,8 @@ class activity_attendance_status : AppCompatActivity() {
     private lateinit var btnBack: ImageView
     private lateinit var tabLayout: TabLayout
     private lateinit var rvAttendanceList: RecyclerView
+    private lateinit var attendanceAdapter: AttendanceAdapter
+    private var attendanceList = mutableListOf<Attendance>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +29,7 @@ class activity_attendance_status : AppCompatActivity() {
         }
 
         initViews()
-
+        setupRecyclerView()
         setupListeners()
     }
 
@@ -34,6 +37,12 @@ class activity_attendance_status : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
         tabLayout = findViewById(R.id.tabLayout)
         rvAttendanceList = findViewById(R.id.rvAttendanceList)
+    }
+
+    private fun setupRecyclerView() {
+        attendanceAdapter = AttendanceAdapter(attendanceList)
+        rvAttendanceList.layoutManager = LinearLayoutManager(this)
+        rvAttendanceList.adapter = attendanceAdapter
     }
 
     private fun setupListeners() {
@@ -46,7 +55,7 @@ class activity_attendance_status : AppCompatActivity() {
                 when (tab?.position) {
                     0 -> { /* 전체 목록 필터링 */ }
                     1 -> { /* 오늘 목록 필터링 */ }
-                    2 -> { /* 이번 주 목록 필터링 */ }
+                    2 -> { /* 이번 주 목록 필터링 */ } // db
                 }
             }
 
