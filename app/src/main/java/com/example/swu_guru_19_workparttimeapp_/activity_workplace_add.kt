@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -25,6 +26,25 @@ class activity_workplace_add : AppCompatActivity() {
     private lateinit var etPhone: EditText
     private lateinit var btnDelete: Button
     private lateinit var btnSave: Button
+
+    // 1. 갤러리 연동용 Launcher
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        uri?.let {
+            ivWorkplaceImage.setImageURI(it)
+            Toast.makeText(this, "사진이 선택되었습니다.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // 2. 주소 검색 웹뷰 연동용 Launcher (추가됨)
+    private val addressLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val address = result.data?.getStringExtra("result_address")
+            address?.let {
+                etAddress.setText(it) // 검색 결과를 주소 EditText에 세팅
+                Toast.makeText(this, "주소가 입력되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,14 +79,15 @@ class activity_workplace_add : AppCompatActivity() {
             finish()
         }
 
+        // 사진 영역 클릭 시 스마트폰 갤러리 열기
         layoutImageSelect.setOnClickListener {
-            // 갤러리 open 연동 기능 추가 예정
-            Toast.makeText(this, "갤러리를 열어 사진을 선택합니다.", Toast.LENGTH_SHORT).show()
+            getContent.launch("image/*")
         }
 
+        // 주소 검색 버튼 클릭 시 KakaoAddressActivity 열기 (수정됨)
         btnSearchAddress.setOnClickListener {
-            // Kakao 주소 검색 API 또는 웹뷰 연동
-            Toast.makeText(this, "주소 검색 화면을 엽니다.", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, KakaoAddressActivity::class.java)
+            addressLauncher.launch(intent)
         }
 
         btnDelete.setOnClickListener {

@@ -16,6 +16,8 @@ class activity_employee_list : AppCompatActivity() {
     private lateinit var btnBack: ImageView
     private lateinit var rvEmployeeList: RecyclerView
     private lateinit var btnAddEmployee: Button
+    private lateinit var employeeAdapter: EmployeeAdapter
+    private var employeeList = mutableListOf<Employee>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +30,7 @@ class activity_employee_list : AppCompatActivity() {
         }
 
         initViews()
-
         setupRecyclerView()
-
         setupListeners()
     }
 
@@ -41,16 +41,9 @@ class activity_employee_list : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        val dummyList = listOf(
-            // db 연결 전 임시 데이터
-            Employee("김민수", "오픈 (09:00 ~ 15:00)"),
-            Employee("이영희", "미들 (15:00 ~ 20:00)"),
-            Employee("박철수", "마감 (20:00 ~ 02:00)")
-        )
-
-        val adapter = EmployeeAdapter(dummyList)
+        employeeAdapter = EmployeeAdapter(employeeList)
         rvEmployeeList.layoutManager = LinearLayoutManager(this)
-        rvEmployeeList.adapter = adapter
+        rvEmployeeList.adapter = employeeAdapter
     }
 
     private fun setupListeners() {

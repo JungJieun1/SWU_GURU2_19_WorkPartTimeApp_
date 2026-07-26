@@ -99,7 +99,7 @@ class activity_task_management : AppCompatActivity() {
                     // DB 또는 리사이클러뷰 리스트에 새 업무(title, dueDate) 추가
                     Toast.makeText(this, "'$title' 업무가 추가되었습니다.", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this, "업무 이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "업무 이름을 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 }
                 dialog.dismiss()
             }
