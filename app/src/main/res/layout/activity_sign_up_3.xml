@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <View
         android:id="@+id/view"
@@ -100,13 +101,14 @@
 
 
     <Button
-        android:id="@+id/btnComplete"
+        android:id="@+id/btn_do_later"
         android:layout_width="381dp"
         android:layout_height="60dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="#F7931E"
         android:text="완료"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -140,8 +142,8 @@
         android:id="@+id/tvTerms3More"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
         android:text=">"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -149,7 +151,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cbTerms2" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -194,7 +196,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="28dp"
         android:text="전체 약관동의"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

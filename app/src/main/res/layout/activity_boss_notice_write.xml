@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true">
+
+    <!-- 상단 바 -->
+    <LinearLayout
+        android:id="@+id/layout_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="#000000" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="새 공지 작성"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        app:layout_constraintTop_toBottomOf="@id/layout_top_bar"/>
+
+    <!-- 제목 입력창 -->
+    <EditText
+        android:id="@+id/et_notice_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:hint="제목을 입력하세요 (예: 휴무 안내)"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:background="@null"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/line_divider"/>
+
+    <View
+        android:id="@+id/line_divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"
+        app:layout_constraintTop_toBottomOf="@id/et_notice_title"/>
+
+    <!-- 내용 입력창 -->
+    <EditText
+        android:id="@+id/et_notice_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="20dp"
+        android:hint="공지 내용을 자세히 적어주세요."
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:background="@null"
+        android:gravity="top|start"
+        android:inputType="textMultiLine"
+        app:layout_constraintTop_toBottomOf="@id/line_divider2"
+        app:layout_constraintBottom_toTopOf="@id/btn_register_notice"/>
+
+    <!-- 등록 버튼 (하단 고정) -->
+    <Button
+        android:id="@+id/btn_register_notice"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="공지 등록하기"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF9800"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
