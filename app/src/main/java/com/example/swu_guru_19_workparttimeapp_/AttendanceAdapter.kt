@@ -17,8 +17,6 @@ class AttendanceAdapter(private val attendanceList: List<Attendance>) :
     RecyclerView.Adapter<AttendanceAdapter.AttendanceViewHolder>() {
 
     class AttendanceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // item_attendance.xml 의 View들과 연결
-        // ※ 만약 item_attendance.xml 안의 ID 이름이 다르면 아래 R.id.OOO 부분을 바꿔주시면 됩니다!
         val tvEmployeeName: TextView = itemView.findViewById(R.id.tvEmployeeName)
         val tvStatus: TextView = itemView.findViewById(R.id.tvStatus)
         val tvTime: TextView = itemView.findViewById(R.id.tvTime)

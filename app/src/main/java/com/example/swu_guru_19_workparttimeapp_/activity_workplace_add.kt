@@ -79,25 +79,21 @@ class activity_workplace_add : AppCompatActivity() {
             finish()
         }
 
-        // 사진 영역 클릭 시 스마트폰 갤러리 열기
         layoutImageSelect.setOnClickListener {
             getContent.launch("image/*")
         }
 
-        // 주소 검색 버튼 클릭 시 KakaoAddressActivity 열기 (수정됨)
         btnSearchAddress.setOnClickListener {
             val intent = Intent(this, KakaoAddressActivity::class.java)
             addressLauncher.launch(intent)
         }
 
         btnDelete.setOnClickListener {
-            // DB 또는 데이터 리스트에서 해당 업장 삭제 처리
             Toast.makeText(this, "업장이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
 
         btnSave.setOnClickListener {
-            // 입력한 데이터(업장명, 업종, 주소, 전화번호) 유효성 검사 및 DB 저장
             Toast.makeText(this, "업장 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }

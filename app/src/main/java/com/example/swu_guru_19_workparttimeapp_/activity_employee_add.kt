@@ -55,12 +55,10 @@ class activity_employee_add : AppCompatActivity() {
         }
 
         layoutProfileSelect.setOnClickListener {
-            // 갤러리를 열어 프로필 사진을 선택하는 기능 추가 예정
             Toast.makeText(this, "프로필 사진을 변경합니다.", Toast.LENGTH_SHORT).show()
         }
 
         btnDelete.setOnClickListener {
-            // DB에서 해당 직원 정보 삭제 처리
             Toast.makeText(this, "직원 정보가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
@@ -75,7 +73,6 @@ class activity_employee_add : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // T입력한 직원 정보(이름, 연락처, 근무유형) 저장/수정 DB 연동
             Toast.makeText(this, "${name} 직원의 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }

@@ -33,7 +33,6 @@ class activity_workplace_list : AppCompatActivity() {
         recyclerView = findViewById(R.id.WorkplaceList)
         val btnWorkplaceAdd = findViewById<Button>(R.id.btnWorkplaceAdd)
 
-        // RecyclerView 세팅 (처음에는 빈 리스트 상태)
         adapter = WorkplaceAdapter(workplaceList)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
