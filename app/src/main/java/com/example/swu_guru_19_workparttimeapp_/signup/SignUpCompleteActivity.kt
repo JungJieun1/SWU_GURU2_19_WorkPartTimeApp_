@@ -20,18 +20,11 @@ class SignUpCompleteActivity : AppCompatActivity() {
         val userRole = intent.getStringExtra("USER_ROLE") ?: "STAFF"
 
         val ivBack = findViewById<ImageView>(R.id.btn_back)
-        val btnSetProfile = findViewById<Button>(R.id.btn_set_profile)
         val btnDoLater = findViewById<Button>(R.id.btn_do_later)
 
         // 여기선 뒤로가기도 그냥 메인으로 보냄
         ivBack.setOnClickListener {
             moveToMain(userRole)
-        }
-
-        btnSetProfile.setOnClickListener {
-            // 지금은 일단 ProfileActivity로 고정
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
         }
 
         btnDoLater.setOnClickListener {
