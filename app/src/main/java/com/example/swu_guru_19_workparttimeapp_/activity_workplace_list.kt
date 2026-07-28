@@ -50,6 +50,5 @@ class activity_workplace_list : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         // 9번(추가/삭제) 화면에서 저장하고 돌아왔을 때
-        // DB 목록을 읽어와서 workplaceList를 갱신, adapter.notifyDataSetChanged()를 호출
     }
 }
