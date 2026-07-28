@@ -1,4 +1,4 @@
-package com.example.swu_guru_19_workparttimeapp_
+package com.example.swu_guru_19_workparttimeapp_.Boss
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,15 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.swu_guru_19_workparttimeapp_.R
+import com.example.swu_guru_19_workparttimeapp_.Workplace
 
-data class Workplace(
-    val name: String,
-    val address: String,
-    val phone: String
-)
-
-class WorkplaceAdapter(private val workplaceList: List<Workplace>) :
-    RecyclerView.Adapter<WorkplaceAdapter.WorkplaceViewHolder>() {
+class WorkplaceAdapter(
+    private val workplaceList: MutableList<Workplace>
+) : RecyclerView.Adapter<WorkplaceAdapter.WorkplaceViewHolder>() {
 
     class WorkplaceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvWorkplaceName: TextView = itemView.findViewById(R.id.tvWorkplaceName)
@@ -27,20 +24,29 @@ class WorkplaceAdapter(private val workplaceList: List<Workplace>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkplaceViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_workplace, parent, false)
+
         return WorkplaceViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: WorkplaceViewHolder, position: Int) {
         val workplace = workplaceList[position]
+
         holder.tvWorkplaceName.text = workplace.name
         holder.tvWorkplaceAddress.text = workplace.address
+        holder.tvWorkplacePhone.text = workplace.category
         holder.tvWorkplacePhone.text = workplace.phone
-
 
         holder.btnEdit.setOnClickListener {
             val context = holder.itemView.context
-            val intent = Intent(context, activity_workplace_add::class.java)
-            intent.putExtra("WORKPLACE_NAME", workplace.name)
+
+            val intent = Intent(context, activity_workplace_add::class.java).apply {
+                putExtra("WORKPLACE_ID", workplace.id)
+                putExtra("WORKPLACE_NAME", workplace.name)
+                putExtra("WORKPLACE_ADDRESS", workplace.address)
+                putExtra("WORKPLACE_CATEGORY", workplace.category)
+                putExtra("WORKPLACE_PHONE", workplace.phone)
+            }
+
             context.startActivity(intent)
         }
     }

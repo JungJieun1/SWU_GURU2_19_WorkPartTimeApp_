@@ -1,22 +1,29 @@
-package com.example.swu_guru_19_workparttimeapp_
+package com.example.swu_guru_19_workparttimeapp_.Boss
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.swu_guru_19_workparttimeapp_.R
+import com.example.swu_guru_19_workparttimeapp_.UserDatabaseHelper
+import com.example.swu_guru_19_workparttimeapp_.Workplace
 
 class activity_workplace_list : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: WorkplaceAdapter
     private var workplaceList = mutableListOf<Workplace>()
+
+    // DB 헬퍼 선언
+    private lateinit var dbHelper: UserDatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +34,8 @@ class activity_workplace_list : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        dbHelper = UserDatabaseHelper(this)
 
         val workplaceHeader = findViewById<LinearLayout>(R.id.workplaceHeader)
         val btnBack = workplaceHeader.getChildAt(0) as? ImageView
@@ -49,6 +58,10 @@ class activity_workplace_list : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // 9번(추가/삭제) 화면에서 저장하고 돌아왔을 때
+
+        val updatedList = dbHelper.getAllWorkplaces()
+        workplaceList.clear()
+        workplaceList.addAll(updatedList)
+        adapter.notifyDataSetChanged()
     }
 }

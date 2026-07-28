@@ -1,4 +1,4 @@
-package com.example.swu_guru_19_workparttimeapp_
+package com.example.swu_guru_19_workparttimeapp_.Boss
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.swu_guru_19_workparttimeapp_.Employee
+import com.example.swu_guru_19_workparttimeapp_.R
 
-data class Employee(val name: String, val workType: String)
-
-class EmployeeAdapter(private val employeeList: List<Employee>) :
-    RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder>() {
+class EmployeeAdapter(
+    private val employeeList: MutableList<Employee>
+) : RecyclerView.Adapter<EmployeeAdapter.EmployeeViewHolder>() {
 
     class EmployeeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvEmployeeName: TextView = itemView.findViewById(R.id.tvEmployeeName)
@@ -22,18 +23,26 @@ class EmployeeAdapter(private val employeeList: List<Employee>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_employee, parent, false)
+
         return EmployeeViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: EmployeeViewHolder, position: Int) {
         val employee = employeeList[position]
+
         holder.tvEmployeeName.text = employee.name
-        holder.tvWorkType.text = employee.workType
+        holder.tvWorkType.text = employee.role
 
         holder.btnEdit.setOnClickListener {
             val context = holder.itemView.context
-            val intent = Intent(context, activity_employee_add::class.java)
-            intent.putExtra("EMPLOYEE_NAME", employee.name)
+
+            val intent = Intent(context, activity_employee_add::class.java).apply {
+                putExtra("EMPLOYEE_ID", employee.id)
+                putExtra("EMPLOYEE_NAME", employee.name)
+                putExtra("EMPLOYEE_PHONE", employee.phone)
+                putExtra("EMPLOYEE_ROLE", employee.role)
+            }
+
             context.startActivity(intent)
         }
     }

@@ -18,4 +18,9 @@
         <item>주말</item>
         <item>기타</item>
     </string-array>
+
+    <string-array name="task_type_array">
+        <item>공동업무</item>
+        <item>개인업무</item>
+    </string-array>
 </resources>

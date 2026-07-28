@@ -1,19 +1,14 @@
-package com.example.swu_guru_19_workparttimeapp_
+package com.example.swu_guru_19_workparttimeapp_.Boss
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.swu_guru_19_workparttimeapp_.AttendanceData
+import com.example.swu_guru_19_workparttimeapp_.R
 
-// 출퇴근 현황 데이터 모델 (이름, 출퇴근 상태, 시간)
-data class Attendance(
-    val employeeName: String,
-    val status: String,
-    val time: String
-)
-
-class AttendanceAdapter(private val attendanceList: List<Attendance>) :
+class AttendanceAdapter(private var attendanceList: List<AttendanceData>) :
     RecyclerView.Adapter<AttendanceAdapter.AttendanceViewHolder>() {
 
     class AttendanceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,10 +25,17 @@ class AttendanceAdapter(private val attendanceList: List<Attendance>) :
 
     override fun onBindViewHolder(holder: AttendanceViewHolder, position: Int) {
         val attendance = attendanceList[position]
-        holder.tvEmployeeName.text = attendance.employeeName
+
+        // UserDatabaseHelper.kt에 정의된 실제 변수명(name, status, date, checkInTime, checkOutTime)을 사용합니다.
+        holder.tvEmployeeName.text = attendance.name
         holder.tvStatus.text = attendance.status
-        holder.tvTime.text = attendance.time
+        holder.tvTime.text = "${attendance.date} (${attendance.checkInTime} ~ ${attendance.checkOutTime})"
     }
 
     override fun getItemCount(): Int = attendanceList.size
+
+    fun updateData(newList: List<AttendanceData>) {
+        this.attendanceList = newList
+        notifyDataSetChanged()
+    }
 }
