@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.swu_guru_19_workparttimeapp_">
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SWU_GURU_19_WorkPartTimeApp_">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"> <!-- 기본 테마 -->
+
+        <!-- 시작 화면: 로그인 -->
         <activity
             android:name=".activity_task_management"
             android:exported="false" />
@@ -30,14 +30,36 @@
             android:name=".activity_workplace_list"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity" />
+        <activity
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <!-- 회원가입 화면들 -->
+        <activity android:name=".signup.SignUpActivity_1" android:exported="false" />
+        <activity android:name=".signup.SignUpActivity_2" android:exported="false" />
+        <activity android:name=".signup.SignUpActivity_3" android:exported="false" />
+        <activity android:name=".signup.SignUpCompleteActivity" android:exported="false" />
+
+        <!-- 메인 화면 (사장님/알바생) -->
+        <activity android:name=".Boss.BossMainActivity" android:exported="false" />
+        <activity android:name=".StaffMainActivity" android:exported="false" />
+
+        <!-- 사장님 세부 기능들 -->
+        <!-- Boss 폴더 안에 있어서 경로 ".Boss.WorkerListActivity" 로 적어야 함 -->
+        <activity android:name=".Boss.WorkerListActivity" android:exported="false" />
+        <activity android:name=".Boss.TaskListActivity" android:exported="false" />
+        <activity android:name=".NoticeListActivity" android:exported="false" />
+        <activity android:name=".NoticeDetailActivity" android:exported="false" />
+        <activity android:name=".NoticeWriteActivity" android:exported="false" />
+
+        <!-- 더보기/마이 (로그아웃, 회원탈퇴) -->
+        <activity android:name=".MoreActivity" android:exported="false" />
+
+    </application>
 </manifest>
