@@ -138,12 +138,13 @@ class UserDatabaseHelper(context: Context) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        if (oldVersion < 5) {
-            db.execSQL(
-                "ALTER TABLE $TABLE_WORKPLACES " +
-                        "ADD COLUMN $COLUMN_WORKPLACE_PHONE TEXT NOT NULL DEFAULT ''"
-            )
-        }
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_NOTICES")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_WORKPLACES")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_EMPLOYEES")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_TASKS")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_ATTENDANCE")
+        onCreate(db)
     }
 
     // ==========================================
