@@ -12,6 +12,26 @@
 
         <!-- 시작 화면: 로그인 -->
         <activity
+            android:name=".activity_task_management"
+            android:exported="false" />
+        <activity
+            android:name=".activity_attendance_status"
+            android:exported="false" />
+        <activity
+            android:name=".activity_employee_add"
+            android:exported="false" />
+        <activity
+            android:name=".activity_employee_list"
+            android:exported="false" />
+        <activity
+            android:name=".activity_workplace_add"
+            android:exported="false" />
+        <activity
+            android:name=".activity_workplace_list"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
