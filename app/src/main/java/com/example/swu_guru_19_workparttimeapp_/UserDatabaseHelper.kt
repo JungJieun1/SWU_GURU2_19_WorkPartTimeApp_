@@ -10,8 +10,7 @@ data class Notice(val id: Int, val title: String, val content: String, val date:
 data class Workplace(val id: Int, val name: String, val address: String, val category: String, val phone: String)
 data class Employee(val id: Int, val name: String, val phone: String, val hourlyWage: String, val role: String)
 data class Task(val id: Int, val title: String, val content: String, val taskType: String, val assignee: String)
-data class AttendanceData(val id: Int = 0, val name: String, val date: String, val checkInTime: String, val checkOutTime: String, val status: String
-)
+
 
 class UserDatabaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -467,7 +466,15 @@ class UserDatabaseHelper(context: Context) :
                 val checkIn = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ATT_CHECK_IN))
                 val checkOut = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ATT_CHECK_OUT))
                 val status = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ATT_STATUS))
-                list.add(AttendanceData(id, name, date, checkIn, checkOut, status))
+                list.add(
+                    AttendanceData(
+                        name = name,
+                        status = status,
+                        date = date,
+                        checkInTime = checkIn,
+                        checkOutTime = checkOut
+                    )
+                )
             } while (cursor.moveToNext())
         }
         cursor.close()

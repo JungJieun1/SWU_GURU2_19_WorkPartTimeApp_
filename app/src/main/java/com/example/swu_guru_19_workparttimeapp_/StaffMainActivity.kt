@@ -13,11 +13,24 @@ class StaffMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_staff_main)
+        val employeeId = intent.getStringExtra("EMPLOYEE_ID") ?: "" // 직원ID받기
 
         // 출근 버튼
         val btnClockIn = findViewById<Button>(R.id.btn_clock_in)
+
         btnClockIn.setOnClickListener {
-            Toast.makeText(this, "오늘도 화이팅! 출근 처리되었습니다.", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(
+                this,
+                AttendanceActivity::class.java
+            )
+
+            intent.putExtra(
+                "EMPLOYEE_ID",
+                employeeId
+            )
+
+            startActivity(intent)
         }
 
         // 전체보기 버튼 클릭 시 공지 목록으로

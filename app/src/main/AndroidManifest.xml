@@ -62,6 +62,9 @@
         <!-- 더보기/마이 (로그아웃, 회원탈퇴) -->
         <activity android:name=".MoreActivity" android:exported="false" />
 
+        <!-- 출퇴근 관리 -->
+        <activity android:name=".AttendanceActivity"/>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

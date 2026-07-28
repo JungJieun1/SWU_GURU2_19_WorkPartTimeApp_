@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.swu_guru_19_workparttimeapp_.AttendanceData
 import com.example.swu_guru_19_workparttimeapp_.R
-import com.example.swu_guru_19_workparttimeapp_.UserDatabaseHelper
 import com.google.android.material.tabs.TabLayout
+import com.example.swu_guru_19_workparttimeapp_.AttendanceDBHelper
 
 class activity_attendance_status : AppCompatActivity() {
 
@@ -21,7 +21,7 @@ class activity_attendance_status : AppCompatActivity() {
     private lateinit var attendanceAdapter: AttendanceAdapter
     private val attendanceList = mutableListOf<AttendanceData>()
 
-    private lateinit var dbHelper: UserDatabaseHelper
+    private lateinit var dbHelper: AttendanceDBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,7 @@ class activity_attendance_status : AppCompatActivity() {
             insets
         }
 
-        dbHelper = UserDatabaseHelper(this)
+        dbHelper = AttendanceDBHelper(this)
 
         initViews()
         setupRecyclerView()
@@ -59,9 +59,11 @@ class activity_attendance_status : AppCompatActivity() {
     }
 
     private fun loadAttendanceData() {
-        val listFromDb = dbHelper.getAllAttendance()
+
+        val listFromDb = dbHelper.getAllAttendanceList()
 
         attendanceList.clear()
+
         attendanceList.addAll(listFromDb)
 
         attendanceAdapter.updateData(attendanceList)
