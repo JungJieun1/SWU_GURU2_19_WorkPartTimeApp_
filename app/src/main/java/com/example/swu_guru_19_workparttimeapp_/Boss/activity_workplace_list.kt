@@ -21,8 +21,6 @@ class activity_workplace_list : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: WorkplaceAdapter
     private var workplaceList = mutableListOf<Workplace>()
-
-    // DB 헬퍼 선언
     private lateinit var dbHelper: UserDatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -21,7 +21,6 @@ class activity_attendance_status : AppCompatActivity() {
     private lateinit var attendanceAdapter: AttendanceAdapter
     private val attendanceList = mutableListOf<AttendanceData>()
 
-    // 💡 DB Helper 선언
     private lateinit var dbHelper: UserDatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +34,6 @@ class activity_attendance_status : AppCompatActivity() {
             insets
         }
 
-        // 💡 DB 객체 초기화
         dbHelper = UserDatabaseHelper(this)
 
         initViews()
