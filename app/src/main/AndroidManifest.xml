@@ -12,25 +12,26 @@
 
         <!-- 시작 화면: 로그인 -->
         <activity
-            android:name=".activity_task_management"
+            android:name=".Boss.activity_task_management"
             android:exported="false" />
         <activity
-            android:name=".activity_attendance_status"
+            android:name=".Boss.activity_attendance_status"
             android:exported="false" />
         <activity
-            android:name=".activity_employee_add"
+            android:name=".Boss.activity_employee_add"
             android:exported="false" />
         <activity
-            android:name=".activity_employee_list"
+            android:name=".Boss.activity_employee_list"
             android:exported="false" />
         <activity
-            android:name=".activity_workplace_add"
+            android:name=".Boss.activity_workplace_add"
             android:exported="false" />
         <activity
-            android:name=".activity_workplace_list"
+            android:name=".Boss.activity_workplace_list"
             android:exported="false" />
         <activity
-            android:name=".MainActivity" />
+            android:name=".Boss.KakaoAddressActivity"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -62,4 +63,7 @@
         <activity android:name=".MoreActivity" android:exported="false" />
 
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>
