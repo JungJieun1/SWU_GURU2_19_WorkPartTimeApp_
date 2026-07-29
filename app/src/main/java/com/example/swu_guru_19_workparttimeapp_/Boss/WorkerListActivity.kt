@@ -10,7 +10,6 @@ class WorkerListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_boss_worker_list) // 화면 연결
 
-        // 뒤로가기 버튼
         val ivBack = findViewById<ImageView>(R.id.iv_back)
         ivBack.setOnClickListener {
             finish()

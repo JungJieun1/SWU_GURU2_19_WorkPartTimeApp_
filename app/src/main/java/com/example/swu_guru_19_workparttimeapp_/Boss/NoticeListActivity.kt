@@ -18,10 +18,8 @@ class NoticeListActivity : AppCompatActivity() {
         val ivBack = findViewById<ImageView>(R.id.iv_back)
         ivBack.setOnClickListener { finish() }
 
-        // 리스트 붙일 컨테이너
         noticeListContainer = findViewById(R.id.layout_notice_list_container)
 
-        // 글쓰기 버튼 이벤트
         val btnWriteNotice = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.btn_write_notice)
         btnWriteNotice.setOnClickListener {
             val intent = Intent(this, NoticeWriteActivity::class.java)
@@ -29,19 +27,16 @@ class NoticeListActivity : AppCompatActivity() {
         }
     }
 
-    // 다시 보일 때마다 새로고침
     override fun onResume() {
         super.onResume()
         loadNoticesFromDB()
     }
 
-    // DB에서 글 가져와서 그려줌
     private fun loadNoticesFromDB() {
-        // 중복 방지용으로 기존 목록 지우기
         noticeListContainer.removeAllViews()
 
         val dbHelper = UserDatabaseHelper(this)
-        val noticeList = dbHelper.getAllNotices() // 최신순으로 옴
+        val noticeList = dbHelper.getAllNotices()
 
         for (notice in noticeList) {
             // item_notice.xml inflate
@@ -53,7 +48,6 @@ class NoticeListActivity : AppCompatActivity() {
             tvTitle.text = notice.title
             tvContent.text = notice.content
 
-            // 클릭하면 상세로
             itemView.setOnClickListener {
                 val intent = Intent(this, NoticeDetailActivity::class.java)
                 intent.putExtra("NOTICE_ID", notice.id)
