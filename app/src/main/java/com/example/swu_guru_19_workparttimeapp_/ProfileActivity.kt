@@ -7,6 +7,5 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 아직 XML 없어서 setContentView는 나중에
     }
 }

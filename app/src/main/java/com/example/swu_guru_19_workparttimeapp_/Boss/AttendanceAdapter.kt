@@ -26,7 +26,6 @@ class AttendanceAdapter(private var attendanceList: List<AttendanceData>) :
     override fun onBindViewHolder(holder: AttendanceViewHolder, position: Int) {
         val attendance = attendanceList[position]
 
-        // UserDatabaseHelper.kt에 정의된 실제 변수명(name, status, date, checkInTime, checkOutTime)을 사용합니다.
         holder.tvEmployeeName.text = attendance.name
         holder.tvStatus.text = attendance.status
         holder.tvTime.text = "${attendance.date} (${attendance.checkInTime} ~ ${attendance.checkOutTime})"
