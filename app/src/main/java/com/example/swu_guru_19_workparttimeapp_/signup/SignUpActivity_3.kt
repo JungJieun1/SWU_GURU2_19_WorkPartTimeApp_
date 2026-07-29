@@ -15,19 +15,17 @@ class SignUpActivity_3 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up_3)
 
-        // 뒤로가기
         val btnBack = findViewById<ImageView>(R.id.btn_back)
         btnBack.setOnClickListener {
             finish()
         }
 
-        val cbAll = findViewById<CheckBox>(R.id.cbAll)       // 전체동의
-        val cbTerm1 = findViewById<CheckBox>(R.id.cbTerms1)   // 필수 1
-        val cbTerm2 = findViewById<CheckBox>(R.id.cbTerms2)   // 필수 2
-        val cbTerm3 = findViewById<CheckBox>(R.id.cbTerms3)   // 필수 3
+        val cbAll = findViewById<CheckBox>(R.id.cbAll)
+        val cbTerm1 = findViewById<CheckBox>(R.id.cbTerms1)
+        val cbTerm2 = findViewById<CheckBox>(R.id.cbTerms2)
+        val cbTerm3 = findViewById<CheckBox>(R.id.cbTerms3)
         val btnComplete = findViewById<Button>(R.id.btn_do_later)
 
-        // 전체동의 누르면 나머지 다 같이 체크
         cbAll.setOnClickListener {
             val isChecked = cbAll.isChecked
             cbTerm1.isChecked = isChecked
@@ -35,7 +33,6 @@ class SignUpActivity_3 : AppCompatActivity() {
             cbTerm3.isChecked = isChecked
         }
 
-        // 개별로 다 체크되면 전체동의도 자동 체크
         val updateAllCheckBox = {
             cbAll.isChecked = cbTerm1.isChecked && cbTerm2.isChecked && cbTerm3.isChecked
         }
@@ -50,7 +47,6 @@ class SignUpActivity_3 : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // 앞 화면들에서 넘어온 값, 없으면 빈 문자열
             val name = intent.getStringExtra("USER_NAME") ?: ""
             val phone = intent.getStringExtra("USER_PHONE") ?: ""
             val email = intent.getStringExtra("USER_EMAIL") ?: ""
@@ -64,7 +60,6 @@ class SignUpActivity_3 : AppCompatActivity() {
             if (isSuccess) {
                 Toast.makeText(this, "회원가입 정보가 안전하게 저장되었습니다!", Toast.LENGTH_SHORT).show()
 
-                // 가입 완료 화면으로, 이전 화면 스택은 정리
                 val completeIntent = Intent(this, SignUpCompleteActivity::class.java)
 
                 completeIntent.putExtra("USER_ROLE", role)

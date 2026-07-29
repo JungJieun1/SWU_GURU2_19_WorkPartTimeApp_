@@ -12,6 +12,9 @@ import com.example.swu_guru_19_workparttimeapp_.AttendanceData
 import com.example.swu_guru_19_workparttimeapp_.R
 import com.google.android.material.tabs.TabLayout
 import com.example.swu_guru_19_workparttimeapp_.AttendanceDBHelper
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class activity_attendance_status : AppCompatActivity() {
 
@@ -58,14 +61,19 @@ class activity_attendance_status : AppCompatActivity() {
         rvAttendanceList.adapter = attendanceAdapter
     }
 
-    private fun loadAttendanceData() {
-
+    private fun loadAttendanceData(tabPosition: Int = 0) {
         val listFromDb = dbHelper.getAllAttendanceList()
 
+        val filteredList = when (tabPosition) {
+            1 -> {
+                val today = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(Date())
+                listFromDb.filter { it.date == today }
+            }
+            else -> listFromDb
+        }
+
         attendanceList.clear()
-
-        attendanceList.addAll(listFromDb)
-
+        attendanceList.addAll(filteredList)
         attendanceAdapter.updateData(attendanceList)
     }
 
@@ -76,11 +84,7 @@ class activity_attendance_status : AppCompatActivity() {
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
-                    0 -> { /* 전체 목록 필터링 - loadAttendanceData() 호출 가능 */ }
-                    1 -> { /* 오늘 목록 필터링 */ }
-                    2 -> { /* 이번 주 목록 필터링 */ }
-                }
+                loadAttendanceData(tab?.position ?: 0)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}

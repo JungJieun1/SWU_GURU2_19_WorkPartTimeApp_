@@ -20,7 +20,7 @@ class AttendanceActivity : AppCompatActivity() {
     private lateinit var btnCheckIn: Button
     private lateinit var btnCheckOut: Button
 
-    private lateinit var db: AttendanceDBHelper
+    private lateinit var db: UserDatabaseHelper
 
     // 로그인한 직원 ID (임시)
     private var employeeId = "staff"
@@ -31,7 +31,7 @@ class AttendanceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_attendance)
 
-        db = AttendanceDBHelper(this)
+        db = UserDatabaseHelper(this)
 
         txtDate = findViewById(R.id.txtDate)
         txtTime = findViewById(R.id.txtTime)
@@ -64,7 +64,7 @@ class AttendanceActivity : AppCompatActivity() {
                 Locale.KOREA
             ).format(Date())
 
-            if (db.insertAttendance(employeeId, today, now)) {
+            if (db.insertAttendance(employeeId, today, now, "", "근무중")) {
                 Toast.makeText(this, "출근 완료", Toast.LENGTH_SHORT).show()
                 loadTodayAttendance()
             }

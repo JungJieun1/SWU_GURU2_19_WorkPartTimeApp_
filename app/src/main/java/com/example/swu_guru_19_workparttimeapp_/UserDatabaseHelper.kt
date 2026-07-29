@@ -5,7 +5,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-// 데이터 클래스 정의
 data class Notice(val id: Int, val title: String, val content: String, val date: String)
 data class Workplace(val id: Int, val name: String, val address: String, val category: String, val phone: String)
 data class Employee(val id: Int, val name: String, val phone: String, val hourlyWage: String, val role: String)
@@ -19,7 +18,7 @@ class UserDatabaseHelper(context: Context) :
         private const val DATABASE_NAME = "AppDatabase.db"
         private const val DATABASE_VERSION = 5
 
-        // 1. 유저 테이블
+        // 유저 테이블
         const val TABLE_USERS = "users"
         const val COLUMN_ID = "id"
         const val COLUMN_NAME = "name"
@@ -58,10 +57,10 @@ class UserDatabaseHelper(context: Context) :
         const val COLUMN_TASK_ID = "id"
         const val COLUMN_TASK_TITLE = "title"
         const val COLUMN_TASK_CONTENT = "content"
-        const val COLUMN_TASK_TYPE = "task_type" // '공동' 또는 '개인'
-        const val COLUMN_TASK_ASSIGNEE = "assignee" // 담당자 이름
+        const val COLUMN_TASK_TYPE = "task_type"
+        const val COLUMN_TASK_ASSIGNEE = "assignee"
 
-        // 5. 근태(Attendance) 테이블
+        // 근태 테이블
         const val TABLE_ATTENDANCE = "attendance"
         const val COLUMN_ATT_ID = "id"
         const val COLUMN_ATT_NAME = "name"
@@ -75,7 +74,6 @@ class UserDatabaseHelper(context: Context) :
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        // users 테이블 생성
         val createTableQuery = ("CREATE TABLE $TABLE_USERS ("
                 + "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "$COLUMN_NAME TEXT, "
@@ -86,7 +84,6 @@ class UserDatabaseHelper(context: Context) :
                 + "$COLUMN_PASSWORD TEXT)")
         db.execSQL(createTableQuery)
 
-        // notices 테이블 생성
         val createNoticeTable = ("CREATE TABLE $TABLE_NOTICES ("
                 + "$COLUMN_NOTICE_ID INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "$COLUMN_NOTICE_TITLE TEXT, "
@@ -94,11 +91,9 @@ class UserDatabaseHelper(context: Context) :
                 + "$COLUMN_NOTICE_DATE TEXT)")
         db.execSQL(createNoticeTable)
 
-        // 기본 공지사항 2개 추가
         db.execSQL("INSERT INTO $TABLE_NOTICES ($COLUMN_NOTICE_TITLE, $COLUMN_NOTICE_CONTENT, $COLUMN_NOTICE_DATE) VALUES ('7/20 휴무 신청 안내', '다음 달 휴무 신청은 이번 주 금요일까지 사장님께 직접 문자 메시지로 전달 바랍니다.\n\n기한을 꼭 지켜주시기 바라며, 주말 근무자의 경우 금요일 저녁 마감 전까지 알려주시면 감사하겠습니다.', '2026-07-20')")
         db.execSQL("INSERT INTO $TABLE_NOTICES ($COLUMN_NOTICE_TITLE, $COLUMN_NOTICE_CONTENT, $COLUMN_NOTICE_DATE) VALUES ('7/18 매장 청소 담당 안내', '미들 타임 청소 구역이 일부 변경되었습니다.\n\n기존 창가 쪽 테이블 구역에서 카운터 앞 대기석까지 포함하여 정리해 주시면 됩니다. 변경된 매뉴얼은 포스기 옆에 붙여두었으니 출근 시 꼭 확인해 주세요.', '2026-07-18')")
 
-        // workplaces (업장) 테이블 생성
         val createWorkplacesTable = ("CREATE TABLE $TABLE_WORKPLACES ("
                 + "$COLUMN_WORKPLACE_ID INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "$COLUMN_WORKPLACE_NAME TEXT, "
@@ -107,7 +102,6 @@ class UserDatabaseHelper(context: Context) :
                 + "$COLUMN_WORKPLACE_PHONE TEXT)")
         db.execSQL(createWorkplacesTable)
 
-        // employees (직원) 테이블 생성
         val createEmployeesTable = ("CREATE TABLE $TABLE_EMPLOYEES ("
                 + "$COLUMN_EMP_ID INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "$COLUMN_EMP_NAME TEXT, "
@@ -116,7 +110,6 @@ class UserDatabaseHelper(context: Context) :
                 + "$COLUMN_EMP_ROLE TEXT)")
         db.execSQL(createEmployeesTable)
 
-        // tasks (업무) 테이블 생성
         val createTasksTable = ("CREATE TABLE $TABLE_TASKS ("
                 + "$COLUMN_TASK_ID INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "$COLUMN_TASK_TITLE TEXT, "
@@ -125,7 +118,6 @@ class UserDatabaseHelper(context: Context) :
                 + "$COLUMN_TASK_ASSIGNEE TEXT)")
         db.execSQL(createTasksTable)
 
-        // attendance (근태) 테이블 생성
         val createAttendanceTable = ("CREATE TABLE $TABLE_ATTENDANCE ("
                 + "$COLUMN_ATT_ID INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "$COLUMN_ATT_NAME TEXT, "
@@ -145,10 +137,6 @@ class UserDatabaseHelper(context: Context) :
         db.execSQL("DROP TABLE IF EXISTS $TABLE_ATTENDANCE")
         onCreate(db)
     }
-
-    // ==========================================
-    // 0. 기존 팀원 기능 (회원가입, 로그인, 공지사항)
-    // ==========================================
 
     fun insertUser(name: String, phone: String, email: String, role: String, userId: String, userPw: String): Boolean {
         val db = this.writableDatabase
@@ -251,10 +239,6 @@ class UserDatabaseHelper(context: Context) :
         return result > 0
     }
 
-    // ==========================================
-    // 1. 업장(Workplace) 관련 기능
-    // ==========================================
-
     fun insertWorkplace(name: String, address: String, category: String, phone: String
     ): Boolean {
         val db = this.writableDatabase
@@ -321,10 +305,6 @@ class UserDatabaseHelper(context: Context) :
         return result > 0
     }
 
-    // ==========================================
-    // 2. 직원(Employee) 관련 기능
-    // ==========================================
-
     fun insertEmployee(name: String, phone: String, hourlyWage: String, role: String): Boolean {
         val db = this.writableDatabase
         val values = ContentValues().apply {
@@ -390,11 +370,6 @@ class UserDatabaseHelper(context: Context) :
         db.close()
         return result > 0
     }
-
-    // ==========================================
-    // 3. 업무(Task) 관련 기능
-    // ==========================================
-
     fun insertTask(title: String, content: String, taskType: String, assignee: String): Boolean {
         val db = this.writableDatabase
         val values = ContentValues().apply {
@@ -433,12 +408,6 @@ class UserDatabaseHelper(context: Context) :
         db.close()
         return result > 0
     }
-
-    // ==========================================
-    // 4. 근태(Attendance) 관련 기능 (신규 추가)
-    // ==========================================
-
-    // 근태 기록 추가
     fun insertAttendance(name: String, date: String, checkIn: String, checkOut: String, status: String): Boolean {
         val db = this.writableDatabase
         val values = ContentValues().apply {
@@ -453,7 +422,6 @@ class UserDatabaseHelper(context: Context) :
         return result != -1L
     }
 
-    // 전체 근태 목록 조회
     fun getAllAttendance(): List<AttendanceData> {
         val list = mutableListOf<AttendanceData>()
         val db = this.readableDatabase
@@ -482,11 +450,65 @@ class UserDatabaseHelper(context: Context) :
         return list
     }
 
-    // 근태 기록 삭제
     fun deleteAttendance(id: Int): Boolean {
         val db = this.writableDatabase
         val result = db.delete(TABLE_ATTENDANCE, "$COLUMN_ATT_ID = ?", arrayOf(id.toString()))
         db.close()
+        return result > 0
+    }
+
+    fun hasAttendance(name: String, date: String): Boolean {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT * FROM $TABLE_ATTENDANCE WHERE $COLUMN_ATT_NAME = ? AND $COLUMN_ATT_DATE = ?",
+            arrayOf(name, date)
+        )
+
+        val exists = cursor.count > 0
+        cursor.close()
+        db.close()
+
+        return exists
+    }
+
+    fun getAttendance(name: String, date: String): Pair<String, String>? {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(
+            "SELECT $COLUMN_ATT_CHECK_IN, $COLUMN_ATT_CHECK_OUT FROM $TABLE_ATTENDANCE WHERE $COLUMN_ATT_NAME = ? AND $COLUMN_ATT_DATE = ?",
+            arrayOf(name, date)
+        )
+
+        var result: Pair<String, String>? = null
+
+        if (cursor.moveToFirst()) {
+            val checkIn = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ATT_CHECK_IN))
+            val checkOut = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ATT_CHECK_OUT)) ?: ""
+            result = Pair(checkIn, checkOut)
+        }
+
+        cursor.close()
+        db.close()
+
+        return result
+    }
+
+    fun updateCheckOut(name: String, date: String, checkOut: String): Boolean {
+        val db = this.writableDatabase
+
+        val values = ContentValues().apply {
+            put(COLUMN_ATT_CHECK_OUT, checkOut)
+            put(COLUMN_ATT_STATUS, "퇴근")
+        }
+
+        val result = db.update(
+            TABLE_ATTENDANCE,
+            values,
+            "$COLUMN_ATT_NAME = ? AND $COLUMN_ATT_DATE = ?",
+            arrayOf(name, date)
+        )
+
+        db.close()
+
         return result > 0
     }
 }

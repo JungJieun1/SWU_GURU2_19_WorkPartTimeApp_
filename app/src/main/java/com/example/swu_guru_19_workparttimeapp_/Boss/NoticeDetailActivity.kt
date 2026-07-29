@@ -21,7 +21,6 @@ class NoticeDetailActivity : AppCompatActivity() {
 
         ivBack.setOnClickListener { finish() }
 
-        // 이전 화면에서 넘어온 데이터, ID 없으면 -1
         val noticeId = intent.getIntExtra("NOTICE_ID", -1)
         val title = intent.getStringExtra("NOTICE_TITLE")
         val content = intent.getStringExtra("NOTICE_CONTENT")
@@ -29,19 +28,17 @@ class NoticeDetailActivity : AppCompatActivity() {
         tvTitle.text = title
         tvContent.text = content
 
-        // 삭제 버튼
         btnDelete.setOnClickListener {
             if (noticeId != -1) {
                 val dbHelper = UserDatabaseHelper(this)
                 val isDeleted = dbHelper.deleteNotice(noticeId)
                 if (isDeleted) {
                     Toast.makeText(this, "공지가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
-                    finish() // 삭제하고 목록으로
+                    finish()
                 }
             }
         }
 
-        // 수정 버튼 - 작성 화면으로 데이터 넘김
         btnEdit.setOnClickListener {
             val intent = Intent(this, NoticeWriteActivity::class.java)
             intent.putExtra("EDIT_NOTICE_ID", noticeId)
